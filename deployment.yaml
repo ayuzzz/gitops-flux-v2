@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: test 
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: amd64
+        kubernetes.io/os: linux
+      containers:
+      - name: test
+        image: arck8sconformance.azurecr.io/samples/demo:v0.1.0
+        ports:
+        - containerPort: 8080
